@@ -5,7 +5,7 @@ cv_assignment/
 ├── cvlib/        SHARED library (Parts 1, 2, 3 all import from it)
 ├── tests/        tests for cvlib  -> python tests/test_cvlib.py
 ├── images/       shared input images
-├── outputs/      results, one sub-folder per part
+├── outputs/      results, one sub-folder per part (part1/, part2/, part3/)
 ├── part1/        Part 1 app (menus, folders, figures)  -> python part1/main.py
 ├── part2/        Part 2 app (to do)
 └── part3/        Part 3 app (to do)
@@ -37,3 +37,16 @@ Common calls:
 5. Changed something in `cvlib`? Run `python tests/test_cvlib.py` before committing.
 6. New shared helpers (pyramids, blending, seams) go in NEW files inside `cvlib/`
    and get exported in `cvlib/__init__.py`. Menus and file handling stay in `partN/`.
+
+## Part 3 (seam carving)
+Library: `cvlib/seam_carving.py`  (energy, DP, remove/carve, draw, bonus).
+App: `python part3/main.py`. Everything it writes goes to `outputs/part3/`:
+```
+outputs/part3/
+├── figures/<photo>/   energy, seams in red, comparison figures (3_1_*, 3_2_*)
+├── carved/<photo>/    each result as its own image
+└── bonus/<photo>/     mask, object removed, width restored (bonus_*)
+```
+Part 2 must write to `outputs/part2/` the same way, so results never mix.
+Optional Bonus mask files: `images/masks/<photo name>_mask.png` (white = object).
+Tests: `python tests/test_seam_carving.py`

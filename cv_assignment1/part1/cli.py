@@ -79,7 +79,18 @@ def choose_filter():
         if c == "7":
             print("  Example (sides must be odd):  1 0 -1; 2 0 -2; 1 0 -1")
             try:
-                return parse_filter(ask("  matrix")), "custom"
+                K = parse_filter(ask("  matrix"))
+                total = K.sum()
+                # An entry sum above 1 makes the image brighter (sum 31 -> 31x
+                # brighter -> all white). Dividing by the sum keeps the brightness.
+                # The convolution itself never normalizes (it must match scipy);
+                # this choice belongs to the menu. Filters that sum to 0 or less
+                # (derivatives) are left alone on purpose.
+                if total > 0 and abs(total - 1) > 1e-9:
+                    answer = ask(f"  entries sum to {total:g}: normalize so they sum to 1? (y/n)", "y")
+                    if answer.lower().startswith("y"):
+                        K = K / total
+                return K, "custom"
             except ValueError as e:
                 print(f"  invalid matrix: {e}")
                 continue

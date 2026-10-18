@@ -43,3 +43,16 @@ def signed_for_show(d, scale=None):
     scale = np.abs(d).max() if scale is None else scale
     scale = scale if scale > 0 else 1.0
     return 0.5 + d / (2 * scale)
+
+
+def resize_image(img, new_w, new_h):
+    """Normal (squashing) resize of a gray or colour float image in [0,1].
+    A library resize is allowed by the assignment ONLY for the 3.2 comparison."""
+    img = np.asarray(img, dtype=np.float64)
+    chans = [img] if img.ndim == 2 else [img[..., c] for c in range(img.shape[2])]
+    out = []
+    for ch in chans:
+        # mode "F" = 32-bit float image, so we do not lose precision
+        pil = Image.fromarray(ch.astype(np.float32), mode="F")
+        out.append(np.asarray(pil.resize((new_w, new_h), Image.LANCZOS), dtype=np.float64))
+    return np.clip(out[0] if img.ndim == 2 else np.dstack(out), 0.0, 1.0)
