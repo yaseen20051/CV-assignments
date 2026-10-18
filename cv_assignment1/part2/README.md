@@ -16,13 +16,12 @@ part2/
 ├── images/            starter-pack images for Part 2 (+ facade.png)
 ├── test_part2.py      python part2/test_part2.py
 ├── requirements.txt
-└── part2_demo.ipynb   the notebook: edit the Settings cell, then Run All
+└── part2_notebook.ipynb   the notebook: edit the Settings cell, then Run All
 ```
 
 ## How to use
-1. Open `part2_demo.ipynb`, edit the **Settings** cell (file names, alignment points, sigmas), Run All.
-   Your own images go in `part2/images/` (or `cv_assignment1/images/`). Missing files fall back to
-   demo images and print a `[demo]` note.
+1. Open `part2_notebook.ipynb`, edit the **Settings** cell (file names, alignment points, sigmas), Run All.
+   Your own images go in `part2/images/` (or `cv_assignment1/images/`). 
 2. For a hybrid pair of your own: `show_with_grid(image)` -> read two matching points -> put them in
    `HYBRID_PAIRS` (`pts_low`, `pts_high`, as `(x, y)`).
 3. Figures are saved to `part2/outputs/figures/`.
